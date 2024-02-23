@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from "react";
 export default function OrderPage() {
     const { clearCart } = useContext(CartContext);
     const [order, setOrder] = useState(null);
-    const [loadingOrder, setLoadingOrder] = useState(true);
+    const [loadingOrder, setLoadingOrder] = useState(false);
     const { id } = useParams();
 
     useEffect(() => {
@@ -29,6 +29,8 @@ export default function OrderPage() {
                     console.error('Error fetching order:', error);
                     setLoadingOrder(false);
                 });
+        } else {
+            setOrder(null);
         }
     }, [id]);
 
