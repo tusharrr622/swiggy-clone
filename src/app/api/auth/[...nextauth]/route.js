@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import NextAuth, { getServerSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import bcrypt from 'bcryptjs';
 import clientPromise from "@/libs/mongoConnect";
 import { UserInfo } from "@/models/UserInfo";
@@ -11,7 +10,7 @@ import { UserInfo } from "@/models/UserInfo";
 
 export const authOptions = {
   secret: process.env.SECRET,
-  // adapter: MongoDBAdapter(clientPromise),
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
