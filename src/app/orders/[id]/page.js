@@ -1,5 +1,6 @@
+"use client"
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from 'next/router';
 import AddressInputs from "@/components/layout/AddressInputs";
 import CartProduct from "@/components/menu/CartProduct";
 
