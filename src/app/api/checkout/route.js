@@ -7,7 +7,7 @@ import { MenuItem } from "@/models/MenuItem";
 const stripe = require('stripe')(process.env.STRIPE_SK);
 
 export async function POST(req) {
-    mongoose.connect(process.env.MONGO_URL);
+ await mongoose.connect(process.env.MONGO_URL);
 
     const { cartProducts, address } = await req.json();
     const session = await getServerSession(authOptions);

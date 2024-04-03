@@ -18,12 +18,21 @@ export default function OrderPage() {
         }
         if (id) {
             setLoadingOrder(true);
-            fetch('/api/orders?_id=' + id).then(res => {
-                res.json().then(orderData => {
+            fetch('/api/orders?_id=' + id)
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error('Failed to fetch order');
+                    }
+                    return res.json();
+                })
+                .then(orderData => {
                     setOrder(orderData);
                     setLoadingOrder(false);
+                })
+                .catch(error => {
+                    console.error('Error fetching order:', error);
+                    setLoadingOrder(false);
                 });
-            })
         }
     }, [clearCart, id]);
 
