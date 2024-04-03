@@ -7,7 +7,7 @@ import { UserInfo } from "@/models/UserInfo";
 
 
 export async function GET(req) {
-    mongoose.connect(process.env.MONGO_URL);
+    await mongoose.connect(process.env.MONGO_URL);
 
     const session = await getServerSession(authOptions);
     const userEmail = session?.user?.email;
@@ -22,7 +22,7 @@ export async function GET(req) {
         return Response.json(await Order.findById(_id))
     }
 
-    if (userInfo && userInfo.admin) { 
+    if (userInfo && userInfo.admin) {
         return Response.json(await Order.find())
     }
 
