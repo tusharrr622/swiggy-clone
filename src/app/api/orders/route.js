@@ -4,10 +4,18 @@ import { useSession } from "next-auth/react";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { Order } from "@/models/Order";
 import { UserInfo } from "@/models/UserInfo";
+import NextCors from "nextjs-cors";
 
 
-export async function GET(req) {
-   await mongoose.connect(process.env.MONGO_URL);
+export async function GET(req,res) {
+    await mongoose.connect(process.env.MONGO_URL);
+
+    await NextCors(req, res, {
+        // Options
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        origin: '*',
+        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    });
 
     const session = await getServerSession(authOptions);
     const userEmail = session?.user?.email;
