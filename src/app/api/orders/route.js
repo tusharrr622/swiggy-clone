@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
+
 import { authOptions } from "../auth/[...nextauth]/route";
-import { Order } from "@/models/Order";
-import { UserInfo } from "@/models/UserInfo";
+
+
 import NextCors from "nextjs-cors";
+import { Order } from "@/models/Order";
 
 
 export async function GET(req,res) {

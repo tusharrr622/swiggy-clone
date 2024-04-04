@@ -18,21 +18,12 @@ export default function OrderPage() {
         }
         if (id) {
             setLoadingOrder(true);
-            fetch('/api/orders?_id=' + id)
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error('Failed to fetch order');
-                    }
-                    return res.json();
-                })
-                .then(orderData => {
+            fetch('/api/orders?_id=' + id).then(res => {
+                res.json().then(orderData => {
                     setOrder(orderData);
                     setLoadingOrder(false);
-                })
-                .catch(error => {
-                    console.error('Error fetching order:', error);
-                    setLoadingOrder(false);
                 });
+            })
         }
     }, [clearCart, id]);
 
@@ -46,9 +37,6 @@ export default function OrderPage() {
     return (
         <section className="max-w-2xl mx-auto mt-8">
             <div className="text-center">
-                <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl dark:primary" >
-                    <mark className="px-2 text-white bg-primary rounded ">Your order</mark>
-                </h1>
                 <div className="mt-4 mb-8">
                     <p>Thanks for your order.</p>
                     <p>We will call you when your order will be on the way.</p>
